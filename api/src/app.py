@@ -32,6 +32,14 @@ cloudinary.config(
 def main():
     return jsonify({ "status": "Server running successfully"})
 
+@app.route('/api/gallery', methods=['GET'])
+def obtener_galeria():
+
+    images = Gallery.query.all()
+    images = [image.serialize() for image in images]
+
+    return jsonify(images), 200
+
 
 @app.route('/api/upload', methods=['POST'])
 def upload_image():
